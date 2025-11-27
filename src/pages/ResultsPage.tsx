@@ -9,6 +9,7 @@ import { Download, TrendingUp, Home, ArrowLeft, BarChart3 } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { predictionApi, comparablesApi, marketTrendsApi } from '@/db/api';
 import { supabase } from '@/db/supabase';
+import { generatePDFReport } from '@/utils/pdfGenerator';
 import type { Prediction, Comparable, MarketTrend } from '@/types/types';
 
 const ResultsPage = () => {
@@ -131,8 +132,24 @@ const ResultsPage = () => {
     return new Intl.NumberFormat('en-IN').format(value);
   };
 
-  const downloadPDF = () => {
-    toast.info('PDF generation feature coming soon!');
+  const downloadPDF = async () => {
+    if (!prediction) {
+      toast.error('No prediction data available');
+      return;
+    }
+
+    try {
+      toast.info('Generating PDF report...');
+      await generatePDFReport({
+        prediction,
+        comparables,
+        marketTrends
+      });
+      toast.success('PDF report generated! Use your browser\'s print dialog to save as PDF.');
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      toast.error('Failed to generate PDF report');
+    }
   };
 
   const chartData = marketTrends.map(trend => ({
