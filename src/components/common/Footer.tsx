@@ -1,67 +1,45 @@
-import React from "react";
-
-const Footer: React.FC = () => {
+const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gradient-to-r from-amber-50 to-orange-50 border-t border-amber-200">
+    <footer className="bg-card border-t border-border mt-auto">
       <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* ================= About Us ================= */}
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
           <div>
-            {/* Title: Change to your project's "About Us" */}
-            <h3 className="text-lg font-semibold text-amber-800 mb-4">
-              {/* About Us */}
+            <h3 className="text-lg font-semibold text-foreground mb-4">
+              About Us
             </h3>
-            <p className="text-gray-600">
-              {/* Fill in your "About Us" introduction here, for example: Committed to xxx, making xxx more xxx */}
+            <p className="text-muted-foreground">
+              Providing accurate house price predictions using advanced machine learning algorithms to help you make informed real estate decisions.
             </p>
           </div>
 
-          {/* ================= Contact Information ================= */}
           <div>
-            {/* Title: Contact Information */}
-            <h3 className="text-lg font-semibold text-amber-800 mb-4">
-              {/* Contact Information */}
+            <h3 className="text-lg font-semibold text-foreground mb-4">
+              Quick Links
             </h3>
-            <div className="text-gray-600 space-y-2">
-              <p>
-                {/* Address: XXX Street, XXX District, XXX City, XXX Province */}
-              </p>
-              <p>
-                {/* Phone: 010-XXXXXXX */}
-              </p>
-              <p>
-                {/* Email: info@example.com */}
-              </p>
+            <div className="text-muted-foreground space-y-2">
+              <p>Home</p>
+              <p>Price Prediction</p>
+              <p>Market Trends</p>
+              <p>Admin Panel</p>
             </div>
           </div>
 
-          {/* ================= Business Hours / Other Information / Can be deleted ================= */}
           <div>
-            {/* Title: Can be changed to "Business Hours" or "Service Hours" */}
-            <h3 className="text-lg font-semibold text-amber-800 mb-4">
-              {/* Business Hours */}
+            <h3 className="text-lg font-semibold text-foreground mb-4">
+              Contact
             </h3>
-            <div className="text-gray-600 space-y-2">
-              <p>
-                {/* Monday to Friday: 9:00-18:00 */}
-              </p>
-              <p>
-                {/* Please check announcements for weekends and public holidays */}
-              </p>
-              <p>
-                {/* Other notes, such as "Advance booking required" */}
-              </p>
+            <div className="text-muted-foreground space-y-2">
+              <p>Email: info@houseprice.com</p>
+              <p>Phone: +1 (555) 123-4567</p>
+              <p>Available 24/7</p>
             </div>
           </div>
         </div>
 
-        {/* ================= Copyright Section ================= */}
-        <div className="mt-8 pt-8 border-t border-amber-200 text-center text-gray-600">
-          <p>
-            {/* © {currentYear} Your Company or Organization Name */}
-          </p>
+        <div className="mt-8 pt-8 border-t border-border text-center text-muted-foreground">
+          <p>{currentYear} House Price Prediction Platform</p>
         </div>
       </div>
     </footer>

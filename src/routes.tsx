@@ -1,4 +1,7 @@
-import SamplePage from './pages/SamplePage';
+import HomePage from './pages/HomePage';
+import PredictPage from './pages/PredictPage';
+import ResultsPage from './pages/ResultsPage';
+import AdminPage from './pages/AdminPage';
 import type { ReactNode } from 'react';
 
 interface RouteConfig {
@@ -10,9 +13,28 @@ interface RouteConfig {
 
 const routes: RouteConfig[] = [
   {
-    name: 'Sample Page',
+    name: 'Home',
     path: '/',
-    element: <SamplePage />
+    element: <HomePage />,
+    visible: true
+  },
+  {
+    name: 'Predict',
+    path: '/predict',
+    element: <PredictPage />,
+    visible: true
+  },
+  {
+    name: 'Results',
+    path: '/results/:id',
+    element: <ResultsPage />,
+    visible: false
+  },
+  {
+    name: 'Admin',
+    path: '/admin',
+    element: <AdminPage />,
+    visible: true
   }
 ];
 
