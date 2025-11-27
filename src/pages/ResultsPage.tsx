@@ -8,8 +8,8 @@ import { toast } from 'sonner';
 import { Download, TrendingUp, Home, ArrowLeft, BarChart3 } from 'lucide-react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { predictionApi, comparablesApi, marketTrendsApi } from '@/db/api';
-import { supabase } from '@/db/supabase';
 import { generatePDFReport } from '@/utils/pdfGenerator';
+import { calculatePrediction as calculatePredictionService } from '@/services/predictionService';
 import type { Prediction, Comparable, MarketTrend } from '@/types/types';
 
 const ResultsPage = () => {
@@ -33,7 +33,7 @@ const ResultsPage = () => {
     setIsLoading(true);
     try {
       const predictionData = await predictionApi.getPredictionById(id);
-      
+
       if (!predictionData) {
         toast.error('Prediction not found');
         navigate('/predict');
@@ -69,46 +69,37 @@ const ResultsPage = () => {
   const calculatePrediction = async (predictionData: Prediction) => {
     setIsCalculating(true);
     try {
-      const { data, error } = await supabase.functions.invoke('predict-price', {
-        body: {
-          city: predictionData.city,
-          locality: predictionData.locality,
-          bhk: predictionData.bhk,
-          total_area: predictionData.total_area,
-          bathrooms: predictionData.bathrooms,
-          floor_number: predictionData.floor_number,
-          total_floors: predictionData.total_floors,
-          property_age: predictionData.property_age,
-          furnishing_status: predictionData.furnishing_status,
-          parking: predictionData.parking,
-          facing_direction: predictionData.facing_direction,
-          has_lift: predictionData.has_lift,
-          has_security: predictionData.has_security,
-          has_power_backup: predictionData.has_power_backup
-        }
+      // Use client-side prediction service
+      const predictionResult = calculatePredictionService({
+        city: predictionData.city,
+        locality: predictionData.locality,
+        bhk: predictionData.bhk,
+        total_area: predictionData.total_area,
+        bathrooms: predictionData.bathrooms,
+        floor_number: predictionData.floor_number,
+        total_floors: predictionData.total_floors,
+        property_age: predictionData.property_age,
+        furnishing_status: predictionData.furnishing_status,
+        parking: predictionData.parking,
+        facing_direction: predictionData.facing_direction,
+        has_lift: predictionData.has_lift,
+        has_security: predictionData.has_security,
+        has_power_backup: predictionData.has_power_backup
       });
 
-      if (error) {
-        const errorMsg = await error?.context?.text();
-        console.error('Edge function error in predict-price:', errorMsg);
-        toast.error('Failed to calculate prediction');
-        return;
-      }
+      // Update the prediction in the database
+      const updatedPrediction = await predictionApi.updatePrediction(predictionData.id, {
+        predicted_min_price: predictionResult.predicted_min_price,
+        predicted_avg_price: predictionResult.predicted_avg_price,
+        predicted_max_price: predictionResult.predicted_max_price,
+        predicted_fair_value: predictionResult.predicted_fair_value,
+        price_per_sqft: predictionResult.price_per_sqft,
+        confidence_score: predictionResult.confidence_score
+      });
 
-      if (data?.success && data?.data) {
-        const updatedPrediction = await predictionApi.updatePrediction(predictionData.id, {
-          predicted_min_price: data.data.predicted_min_price,
-          predicted_avg_price: data.data.predicted_avg_price,
-          predicted_max_price: data.data.predicted_max_price,
-          predicted_fair_value: data.data.predicted_fair_value,
-          price_per_sqft: data.data.price_per_sqft,
-          confidence_score: data.data.confidence_score
-        });
-
-        if (updatedPrediction) {
-          setPrediction(updatedPrediction);
-          toast.success('Prediction calculated successfully!');
-        }
+      if (updatedPrediction) {
+        setPrediction(updatedPrediction);
+        toast.success('Prediction calculated successfully!');
       }
     } catch (error) {
       console.error('Error calculating prediction:', error);
@@ -431,17 +422,17 @@ const ResultsPage = () => {
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={chartData}>
                     <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
-                    <XAxis 
-                      dataKey="name" 
+                    <XAxis
+                      dataKey="name"
                       stroke="hsl(var(--muted-foreground))"
                       style={{ fontSize: '12px' }}
                     />
-                    <YAxis 
+                    <YAxis
                       stroke="hsl(var(--muted-foreground))"
                       style={{ fontSize: '12px' }}
                       label={{ value: 'Price (Cr)', angle: -90, position: 'insideLeft' }}
                     />
-                    <Tooltip 
+                    <Tooltip
                       contentStyle={{
                         backgroundColor: 'hsl(var(--card))',
                         border: '1px solid hsl(var(--border))',
@@ -449,18 +440,18 @@ const ResultsPage = () => {
                       }}
                     />
                     <Legend />
-                    <Line 
-                      type="monotone" 
-                      dataKey="price" 
-                      stroke="hsl(var(--primary))" 
+                    <Line
+                      type="monotone"
+                      dataKey="price"
+                      stroke="hsl(var(--primary))"
                       strokeWidth={2}
                       name="Avg Price (Cr)"
                       dot={{ fill: 'hsl(var(--primary))' }}
                     />
-                    <Line 
-                      type="monotone" 
-                      dataKey="pricePerSqft" 
-                      stroke="hsl(var(--accent))" 
+                    <Line
+                      type="monotone"
+                      dataKey="pricePerSqft"
+                      stroke="hsl(var(--accent))"
                       strokeWidth={2}
                       name="Price per sqft"
                       dot={{ fill: 'hsl(var(--accent))' }}

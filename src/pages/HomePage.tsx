@@ -11,25 +11,25 @@ const HomePage = () => {
       icon: <TrendingUp className="w-12 h-12 text-primary" />,
       title: 'Instant Price Prediction',
       description: 'Get accurate house price estimates in seconds using advanced machine learning algorithms.',
-      image: 'https://miaoda-site-img.s3cdn.medo.dev/images/b09fa2d5-ff94-496d-b49b-c7dd4cc2d039.jpg'
+      image: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&h=400&fit=crop'
     },
     {
       icon: <BarChart3 className="w-12 h-12 text-primary" />,
       title: 'Market Trends Analysis',
       description: 'Visualize historical market trends and make data-driven investment decisions.',
-      image: 'https://miaoda-site-img.s3cdn.medo.dev/images/44a2ff6c-8607-4abd-95b0-2f5a5309cff0.jpg'
+      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop'
     },
     {
       icon: <FileText className="w-12 h-12 text-primary" />,
       title: 'Detailed PDF Reports',
       description: 'Download comprehensive reports with price analysis, comparables, and investment advice.',
-      image: 'https://miaoda-site-img.s3cdn.medo.dev/images/fda5c4dd-de1e-4fb7-a426-9ebe58e1d8c9.jpg'
+      image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&h=400&fit=crop'
     },
     {
       icon: <Shield className="w-12 h-12 text-primary" />,
       title: 'Reliable & Accurate',
       description: 'Our predictions are based on extensive real estate data and proven ML models.',
-      image: 'https://miaoda-site-img.s3cdn.medo.dev/images/496add80-84a6-43e3-89c7-825bf291bd10.jpg'
+      image: 'https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=800&h=400&fit=crop'
     }
   ];
 
@@ -39,7 +39,7 @@ const HomePage = () => {
         <div className="absolute inset-0 opacity-10">
           <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] pointer-events-none" />
         </div>
-        
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center">
             <h1 className="text-4xl xl:text-6xl font-bold text-primary-foreground mb-6 animate-fade-in">

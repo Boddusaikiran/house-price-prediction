@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Home, TrendingUp, Shield, Menu, X } from "lucide-react";
+import { Home, TrendingUp, Shield, Menu, X, Building2 } from "lucide-react";
 import routes from "../../routes";
 import { Button } from "@/components/ui/button";
 
@@ -29,7 +29,7 @@ const Header = () => {
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2 group">
               <div className="w-10 h-10 rounded-lg gradient-primary flex items-center justify-center shadow-glow">
-                <Home className="w-6 h-6 text-primary-foreground" />
+                <Building2 className="w-6 h-6 text-primary-foreground" />
               </div>
               <span className="text-xl font-bold gradient-text">
                 House Price Prediction
