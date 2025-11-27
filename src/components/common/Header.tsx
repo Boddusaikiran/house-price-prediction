@@ -28,9 +28,11 @@ const Header = () => {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2 group">
-              <div className="w-10 h-10 rounded-lg gradient-primary flex items-center justify-center shadow-glow">
-                <Building2 className="w-6 h-6 text-primary-foreground" />
-              </div>
+              <img
+                src="/images/logo.png"
+                alt="Logo"
+                className="w-10 h-10 rounded-lg shadow-glow object-cover"
+              />
               <span className="text-xl font-bold gradient-text">
                 House Price Prediction
               </span>
