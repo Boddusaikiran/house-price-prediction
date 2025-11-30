@@ -1,0 +1,74 @@
+.login-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+  padding: 2rem 2.5rem;
+  width: 320px;
+  max-width: 90%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.login-card h1 {
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+  color: #333;
+}
+
+.login-form input {
+  width: 100%;
+  padding: .75rem 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: .95rem;
+}
+
+.login-form button {
+  width: 100%;
+  padding: .75rem;
+  background: #4a90e2;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .2s;
+}
+
+.login-form button:hover { background: #357ab8; }
+
+.characters {
+  position: relative;
+  height: 120px;
+  margin-top: 2rem;
+}
+
+.char {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  cursor: default;
+}
+
+.char .body { fill: var(--body-color); }
+
+.char .eye { fill: #fff; stroke: #333; stroke-width: 1px; }
+
+.char .pupil { fill: #333; transition: transform .05s linear; }
+
+.char .mouth { stroke: #333; stroke-width: 2px; fill: none; }
+
+/* Position characters */
+.char:nth-child(1) { --body-color: #ffb400; left: 10%; bottom: 0; }
+.char:nth-child(2) { --body-color: #7c4dff; left: 30%; bottom: 0; }
+.char:nth-child(3) { --body-color: #4a90e2; left: 50%; bottom: 0; }
+.char:nth-child(4) { --body-color: #f5a623; left: 70%; bottom: 0; }
+.char:nth-child(5) { --body-color: #ff6b6b; left: 90%; bottom: 0; }
+
+@keyframes blink {
+  0%,90%,100% { transform: scaleY(1); }
+  95% { transform: scaleY(0.1); }
+}
+
+.eye { animation: blink 5s infinite; transform-origin: center; }

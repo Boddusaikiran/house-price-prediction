@@ -3,6 +3,7 @@ import PredictPage from './pages/PredictPage';
 import ResultsPage from './pages/ResultsPage';
 import AdminPage from './pages/AdminPage';
 import type { ReactNode } from 'react';
+import LoginPage from './pages/LoginPage';
 
 interface RouteConfig {
   name: string;
@@ -34,6 +35,12 @@ const routes: RouteConfig[] = [
     name: 'Admin',
     path: '/admin',
     element: <AdminPage />,
+    visible: true
+  },
+  {
+    name: 'Login',
+    path: '/login',
+    element: <LoginPage />,
     visible: true
   }
 ];
